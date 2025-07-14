@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import AddEntryView from '../views/AddEntryView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import { useAuth } from '@/composables/useAuth'
 
@@ -30,6 +31,12 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddEntryView,
       meta: { requiresAuth: true }
     },
     {

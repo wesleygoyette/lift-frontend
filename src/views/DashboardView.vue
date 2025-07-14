@@ -28,9 +28,12 @@ import WelcomeWall from '@/components/WelcomeWall.vue';
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              <router-link
+                to="/add"
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center"
+              >
                 Add New Entry
-              </button>
+              </router-link>
               <button class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
                 View All Entries
               </button>
