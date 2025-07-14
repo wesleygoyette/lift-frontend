@@ -113,7 +113,7 @@ function getBlockColor(colIndex, rowIndex) {
 </script>
 
 <template>
-  <div class="flex justify-between w-full h-screen p-[16px] relative bg-black">
+  <div class="flex justify-between w-full h-full min-h-screen p-[16px] relative bg-black" style="height: 100vh;">
     <div class="flex flex-col justify-between" v-for="col in gridCols" :key="`col-${col}`">
       <div
         :style="{

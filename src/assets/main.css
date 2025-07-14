@@ -22,3 +22,33 @@ body {
   padding: 10px;
   box-sizing: border-box;
 }
+
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.autofill-dark:-webkit-autofill,
+.autofill-dark:-webkit-autofill:hover,
+.autofill-dark:-webkit-autofill:focus,
+.autofill-dark:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px black inset !important;
+  -webkit-text-fill-color: white !important;
+  background-color: black !important;
+  color: white !important;
+  caret-color: white !important;
+  cursor: text !important;
+}
+
+.autofill-dark:-moz-autofill {
+  background-color: black !important;
+  color: white !important;
+  caret-color: white !important;
+  cursor: text !important;
+}
+
+.autofill-dark {
+  caret-color: white !important;
+  cursor: text !important;
+}

@@ -1,62 +1,39 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import WelcomeWall from '@/components/WelcomeWall.vue';
-import * as pdfjsLib from 'pdfjs-dist';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuth } from '@/composables/useAuth';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+const router = useRouter()
+const { isAuthenticated } = useAuth()
 
-const pdfCanvas = ref(null);
-const isLoading = ref(true);
+const buttonText = computed(() => {
+  return isAuthenticated.value ? "Dashboard" : "Login"
+})
 
-onMounted(async () => {
-  try {
-    const pdf = await pdfjsLib.getDocument('/resume.pdf').promise;
-
-    const page = await pdf.getPage(1);
-
-    const viewport = page.getViewport({ scale: 10 });
-
-    const canvas = pdfCanvas.value;
-    const context = canvas.getContext('2d');
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    await page.render({
-      canvasContext: context,
-      viewport: viewport
-    }).promise;
-
-    isLoading.value = false;
-  } catch (error) {
-    console.error('Error loading PDF:', error);
-    isLoading.value = false;
+const handleButtonClick = () => {
+  if (isAuthenticated.value) {
+    router.push('/dashboard')
+  } else {
+    router.push('/login')
   }
-});
-
+}
 </script>
 
 <template>
-  <main class="flex flex-col items-center">
-    <WelcomeWall>
-      <div class="w-full h-full flex flex-col items-center mt-[20vh]">
-        <h1 class="text-[69px]">Wesley Goyette</h1>
-        <h3 class="mt-[12px] text-[16px]">Developer Portfolio</h3>
+  <main class="fixed w-screen h-screen flex flex-col items-center">
+    <WelcomeWall class="fixed top-0 left-0">
+      <div class="w-full flex flex-col items-center h-screen">
+        <h1 class="permanent-marker-regular text-[98px] flex gap-[12px] mt-[10vh] items-baseline">P<span class="text-[48px] mr-[32px]">ersonal</span>R<span class="text-[48px]">ecord</span></h1>
+        <button
+          @click="handleButtonClick"
+          class="text-[16px] text-black bg-gray-200 font-bold px-4 py-1 rounded-full mt-[10vh]"
+          style="box-shadow: 0 0px 8px 0 white;"
+        >
+          {{buttonText}}
+        </button>
       </div>
     </WelcomeWall>
-
-    <div class="bg-gradient-to-b from-[#080833] to-black w-full h-full flex flex-col items-center">
-      <div class="bg-white text-black max-w-[700px] w-[90%] p-0 mt-[-40px] z-10 flex flex-col items-center borderGradient aspect-[0.772727] relative">
-        <div v-if="isLoading" class="w-full h-full flex items-center justify-center">
-          <div class="text-gray-500">Loading PDF...</div>
-        </div>
-        <canvas
-          ref="pdfCanvas"
-          v-show="!isLoading"
-          class="w-full h-full object-contain"
-          style="pointer-events: none;"
-        />
-      </div>
-    </div>
 
   </main>
 </template>

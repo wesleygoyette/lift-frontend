@@ -1,18 +1,16 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import AppNavigation from '@/components/AppNavigation.vue'
+import { computed } from 'vue'
+
+const route = useRoute()
+
+const showNavigation = computed(() => {
+  return ['dashboard'].includes(route.name)
+})
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-      </nav>
-    </div>
-  </header> -->
-
+  <AppNavigation v-if="showNavigation" />
   <RouterView />
 </template>
