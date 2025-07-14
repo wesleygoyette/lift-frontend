@@ -1,7 +1,6 @@
 <template>
-  <WelcomeWall class="w-screen h-screen">
-    <div class="w-screen h-screen flex items-center justify-center">
-      <div class="bg-black p-8 rounded-lg shadow-lg w-full max-w-md border-[0.5px] border-white">
+  <div class="w-screen h-screen flex items-center justify-center">
+    <div class="bg-black p-8 rounded-lg shadow-lg w-full max-w-md border-[0.5px] border-white">
         <div class="text-center mb-8">
           <h1 class="permanent-marker-regular text-3xl text-gray-100">Welcome back!</h1>
         </div>
@@ -57,14 +56,12 @@
         </div>
       </div>
     </div>
-  </WelcomeWall>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
-import WelcomeWall from '@/components/WelcomeWall.vue'
 
 const router = useRouter()
 const { login } = useAuth()

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import WelcomeWall from '@/components/WelcomeWall.vue';
 import { useRouter } from 'vue-router';
 import { useEntries } from '@/composables/useEntries';
 
@@ -18,10 +17,9 @@ const handleSubmit = async () => {
   try {
     await createEntry(entry.value);
 
-    // Reset form
     entry.value = '';
 
-    await router.push('/dashboard');
+    await router.push('/entries');
   } catch (error) {
     console.error('Error saving entry:', error);
     // You might want to show a toast notification or error message here
@@ -39,10 +37,9 @@ const handleKeyDown = (event) => {
 </script>
 
 <template>
-  <div class="w-full h-full text-white bg-red-400">
-    <WelcomeWall class="h-[calc(100vh-64px)]">
-      <div class="mx-6 py-6 sm:px-0">
-        <div class="max-w-4xl mx-auto h-[calc(100vh-64px)] flex flex-col">
+  <div class="w-full h-screen">
+    <div class="mx-6 py-6 sm:px-0">
+      <div class="max-w-4xl mx-auto h-[calc(100vh-64px)] flex flex-col">
           <!-- Header -->
           <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-100 mb-2">Add New Entry</h2>
@@ -90,7 +87,7 @@ const handleKeyDown = (event) => {
                     class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center space-x-2"
                   >
                     <span v-if="isLoading" class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
-                    <span>{{ isLoading ? 'Saving...' : 'Save Entry' }}</span>
+                    <span>{{ isLoading ? 'Saving...' : 'Save' }}</span>
                   </button>
                 </div>
               </div>
@@ -99,7 +96,6 @@ const handleKeyDown = (event) => {
 
         </div>
       </div>
-    </WelcomeWall>
   </div>
 </template>
 

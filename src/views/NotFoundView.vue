@@ -1,5 +1,4 @@
 <template>
-  <WelcomeWall>
   <div class="h-screen">
     <div class="text-center mt-[20vh]">
       <h1 class="text-6xl font-bold text-gray-100 mb-4">404</h1>
@@ -13,9 +12,7 @@
       </router-link>
     </div>
   </div>
-  </WelcomeWall>
 </template>
 
 <script setup>
-import WelcomeWall from '@/components/WelcomeWall.vue';
 </script>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import WelcomeWall from '@/components/WelcomeWall.vue';
 import { useEntries } from '@/composables/useEntries';
 import { computed, onMounted, ref } from 'vue';
 
@@ -52,16 +51,15 @@ const recentEntries = computed(() => {
 </script>
 
 <template>
-  <div class="w-full h-full text-white bg-red-400">
-    <WelcomeWall class="h-[calc(100vh-64px)]">
-      <div class="mx-6 py-6 sm:px-0 ">
-        <div class="text-center h-[calc(100vh-64px)] flex flex-col items-center">
+  <div class="w-full h-[calc(100vh-64px)] text-white overflow-hidden">
+    <div class="mx-6 py-6 sm:px-0 h-full">
+      <div class="text-center h-full flex flex-col items-center">
           <h2 v-if="!fetchEntriesError && !isLoading" class="text-3xl font-bold text-gray-100 mb-4">Dashboard</h2>
           <p v-if="!fetchEntriesError && !isLoading" class="text-gray-200 mb-8">Welcome to your personal record dashboard</p>
 
           <!-- Error Display -->
-          <div v-if="fetchEntriesError" class="h-full pt-[20%]">
-            <div v-if="fetchEntriesError" class="bg-[#c1424242] border border-[#c14242] text-white px-4 py-3 rounded mb-6 w-fit flex flex-col gap-[12px]">
+          <div v-if="fetchEntriesError" class="flex-1 flex items-center justify-center">
+            <div class="bg-[#c1424242] border border-[#c14242] text-white px-4 py-3 rounded mb-6 w-fit flex flex-col gap-[12px]">
               <div class="font-bold">Error loading entries</div>
               <div class="text-sm mb-3">{{ fetchEntriesError.message || 'Failed to fetch entries. Please try again.' }}</div>
               <button
@@ -102,13 +100,15 @@ const recentEntries = computed(() => {
               >
                 Add New Entry
               </router-link>
-              <button class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+              <router-link
+                to="/entries"
+                class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors inline-block text-center"
+              >
                 View All Entries
-              </button>
+              </router-link>
             </div>
           </template>
         </div>
       </div>
-    </WelcomeWall>
   </div>
 </template>

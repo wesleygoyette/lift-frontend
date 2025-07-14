@@ -4,6 +4,8 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import AddEntryView from '../views/AddEntryView.vue'
+import ViewEntriesView from '../views/ViewEntriesView.vue'
+import ViewSingleEntryView from '../views/ViewSingleEntryView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import { useAuth } from '@/composables/useAuth'
 
@@ -37,6 +39,18 @@ const router = createRouter({
       path: '/add',
       name: 'add',
       component: AddEntryView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/entries',
+      name: 'entries',
+      component: ViewEntriesView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/entries/:id',
+      name: 'entry',
+      component: ViewSingleEntryView,
       meta: { requiresAuth: true }
     },
     {
