@@ -2,11 +2,13 @@
 import { ref } from 'vue';
 import WelcomeWall from '@/components/WelcomeWall.vue';
 import { useRouter } from 'vue-router';
+import { useEntries } from '@/composables/useEntries';
 
 const entry = ref('');
 const isLoading = ref(false);
 const placeholder = ref('Tell me about your workout, nutrition, or personal goals...');
 const router = useRouter();
+const { createEntry } = useEntries();
 
 const handleSubmit = async () => {
   if (!entry.value.trim()) return;
@@ -14,11 +16,7 @@ const handleSubmit = async () => {
   isLoading.value = true;
 
   try {
-    // TODO: Add API call to save entry
-    console.log('Saving entry:', entry.value);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await createEntry(entry.value);
 
     // Reset form
     entry.value = '';
@@ -26,6 +24,8 @@ const handleSubmit = async () => {
     await router.push('/dashboard');
   } catch (error) {
     console.error('Error saving entry:', error);
+    // You might want to show a toast notification or error message here
+    alert('Failed to save entry: ' + error.message);
   } finally {
     isLoading.value = false;
   }

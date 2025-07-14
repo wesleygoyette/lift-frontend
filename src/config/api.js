@@ -3,6 +3,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localho
 export const API_ENDPOINTS = {
   login: `${API_BASE_URL}/api/v1/auth/login`,
   register: `${API_BASE_URL}/api/v1/auth/register`,
+  entries: `${API_BASE_URL}/api/v1/entries`,
 }
 
 export const createApiRequest = (endpoint, options = {}) => {
