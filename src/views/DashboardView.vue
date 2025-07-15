@@ -34,7 +34,15 @@ const retryFetchEntries = async () => {
         entries.value = await fetchEntries();
         isLoading.value = false;
     } catch (error) {
-        fetchEntriesError.value = error;
+        if (error.message == "Failed to fetch") {
+
+            error.message = "Network Error"
+            fetchEntriesError.value = error
+        }
+        else {
+
+            fetchEntriesError.value = error;
+        }
         isLoading.value = false;
     }
 };
