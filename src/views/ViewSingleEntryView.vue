@@ -77,28 +77,19 @@ const goBack = () => {
             <!-- Entry Content -->
             <div v-else class="flex-1 flex flex-col min-h-0">
               <!-- Entry Header -->
-              <div class="border-b border-white/20 p-6 flex-shrink-0">
+              <div class="border-b border-white/20 p-6 flex-shrink-0 flex justify-between">
                 <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-gray-400 text-sm mb-1">
+                  <div class="flex items-center space-x-4">
+                    <span class="text-xl text-gray-100" v-if="entry">
                       {{ formatDate(entry.created_at) }}
-                    </p>
-                    <div class="flex items-center space-x-3">
-                      <span class="text-xs bg-blue-600/30 text-blue-200 px-2 py-1 rounded">
-                        {{ entry.content.split(/\s+/).filter(Boolean).length }} words
-                      </span>
-                    </div>
+                    </span>
                   </div>
-                  <button
-                    @click="handleDelete"
-                    :disabled="isDeleting"
-                    class="text-red-400 hover:text-red-300 p-2 rounded transition-colors disabled:opacity-50"
-                    title="Delete entry"
-                  >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                  </button>
+                </div>
+
+                <div v-if="entry" class="flex items-center space-x-3">
+                  <span class="text-sm bg-blue-600/30 text-blue-200 px-2 py-1 rounded">
+                    {{ entry.content.split(/\s+/).filter(Boolean).length }} words
+                  </span>
                 </div>
               </div>
 
@@ -113,12 +104,19 @@ const goBack = () => {
             <!-- Bottom Bar -->
             <div class="border-t border-white/20 p-4 bg-black/20 flex-shrink-0">
               <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                  <span class="text-sm text-gray-300" v-if="entry">
-                    Created {{ formatDate(entry.created_at) }}
-                  </span>
-                </div>
 
+
+
+                    <button
+                    @click="handleDelete"
+                    :disabled="isDeleting"
+                    class="text-red-400 hover:text-red-300 p-2 rounded transition-colors disabled:opacity-50"
+                    title="Delete entry"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
                 <div class="flex items-center space-x-3">
                   <button
                     @click="goBack"
